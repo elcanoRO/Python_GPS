@@ -23,7 +23,7 @@ array2= []
 array2.append({'lat':123, 'lon':231})
 
 import pynmea2
-import geographiclib
+from geographiclib.geodesic import Geodesic#import geographiclib
 with open("C:\\Users\\lucian_crisan\\Downloads\\GeoSphere\\SparkFun\\NMEA_example.txt", "r") as ins:
     array = []
     for line in ins:
