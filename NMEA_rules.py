@@ -46,3 +46,23 @@ for elem in array:
              latAvg+= msg.latitude
              lonAvg+= msg.longitude
 Geodesic.WGS84.Area(arrayDictLatLon)
+#sau folosind un average pe 10 puncte si o diferenta de cel putin 5m intre puncte
+arrayDictLatLon, latAvg, lonAvg, index= [], 0.0, 0.0, 0
+for elem in array:
+	msg = pynmea2.parse(elem)
+	index+= 1
+	if(index>= 10):
+		try:
+			dist= Geodesic.WGS84.Inverse(arrayDictLatLon[-1]['lat'], arrayDictLatLon[-1]['lon'], latAvg/10.0, latAvg/10.0)['s12']
+			#distance between last point and the point to be add is greater then 5 m.
+			print(dist)
+			if(dist>= 5.0):
+				arrayDictLatLon.append({'lat':latAvg/10.0, 'lon':latAvg/10.0})
+		except Exception:
+			#the first point should be add manualy
+			arrayDictLatLon.append({'lat':latAvg/10.0, 'lon':latAvg/10.0})
+		index, latAvg, lonAvg= 0, 0, 0
+	else:
+		latAvg+= msg.latitude
+		lonAvg+= msg.longitude
+Geodesic.WGS84.Area(arrayDictLatLon)
