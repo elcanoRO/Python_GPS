@@ -1,9 +1,10 @@
-#RPI.GPIO interrupts: 				http://raspi.tv/2013/how-to-use-interrupts-with-python-on-the-raspberry-pi-and-rpi-gpio-part-3
-#PY Serial: 						http://pyserial.sourceforge.net/shortintro.html, pentru citirea ttyS0
+#RPI.GPIO interrupts: 			http://raspi.tv/2013/how-to-use-interrupts-with-python-on-the-raspberry-pi-and-rpi-gpio-part-3
+#PY Serial: 				http://pyserial.sourceforge.net/shortintro.html, pentru citirea ttyS0
 #GrooveOLED python library: 		https://github.com/DexterInd/GrovePi/blob/master/Software/Python/grove_oled.py SAU https://github.com/dda/MicroPython/blob/master/Grove_OLED.py
-#Remove login from RPI: 			http://elinux.org/RPi_Debian_Auto_Login
+#Remove login from RPI: 		http://elinux.org/RPi_Debian_Auto_Login
 #Physical shutdown button for RPI: 	http://www.instructables.com/id/Physical-Shutdown-Button-For-Raspberry-Pi/
 #Launch Python script on startup:	http://www.instructables.com/id/Raspberry-Pi-Launch-Python-script-on-startup/?ALLSTEPS
+#Change font for SSD1327D I2C ctrl:	https://code.google.com/p/u8glib/
 
 import pynmea2
 from geographiclib.geodesic import Geodesic#import geographiclib
