@@ -5,6 +5,7 @@
 #Physical shutdown button for RPI: 	http://www.instructables.com/id/Physical-Shutdown-Button-For-Raspberry-Pi/
 #Launch Python script on startup:	http://www.instructables.com/id/Raspberry-Pi-Launch-Python-script-on-startup/?ALLSTEPS
 #Change font for SSD1327D I2C ctrl:	https://code.google.com/p/u8glib/
+#U8Glib with RPI:			http://hallard.me/driving-oled-lcd/
 
 import pynmea2
 from geographiclib.geodesic import Geodesic#import geographiclib
