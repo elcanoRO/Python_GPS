@@ -6,6 +6,8 @@
 #Launch Python script on startup:	http://www.instructables.com/id/Raspberry-Pi-Launch-Python-script-on-startup/?ALLSTEPS
 #Change font for SSD1327D I2C ctrl:	https://code.google.com/p/u8glib/
 #U8Glib with RPI:			http://hallard.me/driving-oled-lcd/
+#Gauggete(doar ptr SSD1306):		http://guy.carpenter.id.au/gaugette/2012/11/11/font-support-for-ssd1306/
+#Python impl fot T6963C:		https://github.com/Orabig/Rasp-T6963C
 
 import pynmea2
 from geographiclib.geodesic import Geodesic#import geographiclib
