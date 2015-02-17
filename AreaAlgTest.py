@@ -28,13 +28,46 @@ def avg_array(array):
 	return returnArray
 terenZgomotAvg= avg_array(teren)
 	
-#run the alg on noisy path
+#VAR 1: run the alg on original/noisy path
 arrayDictLatLon= []
 for elem in teren:
 	arrayDictLatLon.append({'lat':elem[1], 'lon':elem[0]})
 g= Geodesic.WGS84.Area(arrayDictLatLon)
 g['area']/10000
+#VAR 2: make an average of 10 points
+arrayDictLatLon, latAvg, lonAvg, index= [], 0.0, 0.0, 0
+for elem in terenZgomot:
+         index+= 1
+         if(index> 10):
+             arrayDictLatLon.append({'lat':latAvg/10.0, 'lon':lonAvg/10.0})
+             index, latAvg, lonAvg= 0, 0, 0
+         else:
+             latAvg+= elem[1]
+             lonAvg+= elem[0]
+             
+g= Geodesic.WGS84.Area(arrayDictLatLon)
+g['area']/10000
+#VAR 3: average+ minimum distance
+arrayDictLatLon, latAvg, lonAvg, index= [], 0.0, 0.0, 0
+for elem in terenZgomot:
+	index+= 1
+	if(index> 10):
+		try:
+			dist= Geodesic.WGS84.Inverse(arrayDictLatLon[-1]['lat'], arrayDictLatLon[-1]['lon'], latAvg/10.0, latAvg/10.0)['s12']
+			#distance between last point and the point to be add is greater then 5 m.
+			print(dist)
+			if(dist>= 5.0):
+				arrayDictLatLon.append({'lat':latAvg/10.0, 'lon':latAvg/10.0})
+		except Exception:
+			#the first point should be add manualy
+			arrayDictLatLon.append({'lat':latAvg/10.0, 'lon':latAvg/10.0})
+		index, latAvg, lonAvg= 0, 0, 0
+	else:
+		latAvg+= elem[1]
+		lonAvg+= elem[0]
 
+g= Geodesic.WGS84.Area(arrayDictLatLon)
+g['area']/10000
 #prepare to be put again in KML file
 for elem in terenZgomot:
 	terenZgomotKML.append(elem[0])
