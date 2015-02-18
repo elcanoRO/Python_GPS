@@ -32,14 +32,15 @@ terenZgomotAvg= avg_array(teren)
 arrayDictLatLon= []
 for elem in teren:
 	arrayDictLatLon.append({'lat':elem[1], 'lon':elem[0]})
+	
 g= Geodesic.WGS84.Area(arrayDictLatLon)
 g['area']/10000
-#VAR 2: make an average of 10 points
-arrayDictLatLon, latAvg, lonAvg, index= [], 0.0, 0.0, 0
+#VAR 2: make an average of N points
+arrayDictLatLon, latAvg, lonAvg, index, medie= [], 0.0, 0.0, 0, 5.0
 for elem in terenZgomot:
          index+= 1
-         if(index> 10):
-             arrayDictLatLon.append({'lat':latAvg/10.0, 'lon':lonAvg/10.0})
+         if(index> medie):
+             arrayDictLatLon.append({'lat':latAvg/medie, 'lon':lonAvg/medie})
              index, latAvg, lonAvg= 0, 0, 0
          else:
              latAvg+= elem[1]
@@ -47,23 +48,23 @@ for elem in terenZgomot:
              
 g= Geodesic.WGS84.Area(arrayDictLatLon)
 g['area']/10000
-#VAR 3: average+ minimum distance
-arrayDictLatLon, latAvg, lonAvg, index= [], 0.0, 0.0, 0
+#VAR 3: average on N+ minimum distance M
+arrayDictLatLon, latAvg, lonAvg, index, medie, distMin, = [], 0.0, 0.0, 0, 5.0, 5.0
 for elem in terenZgomot:
 	index+= 1
-	if(index> 10):
+	if(index> medie):
 		try:
-			dist= Geodesic.WGS84.Inverse(arrayDictLatLon[-1]['lat'], arrayDictLatLon[-1]['lon'], latAvg/10.0, latAvg/10.0)['s12']
+			dist= Geodesic.WGS84.Inverse(arrayDictLatLon[-1]['lat'], arrayDictLatLon[-1]['lon'], latAvg/medie, latAvg/medie)['s12']
 			#distance between last point and the point to be add is greater then 5 m.
-			print(Geodesic.WGS84.Inverse(arrayDictLatLon[-1]['lat'], arrayDictLatLon[-1]['lon'], latAvg/10.0, latAvg/10.0))
-			if(dist>= 5.0):
-				arrayDictLatLon.append({'lat':latAvg/10.0, 'lon':lonAvg/10.0})
+			print(Geodesic.WGS84.Inverse(arrayDictLatLon[-1]['lat'], arrayDictLatLon[-1]['lon'], latAvg/medie, latAvg/medie))
+			if(dist>= distMin):
+				arrayDictLatLon.append({'lat':latAvg/medie, 'lon':lonAvg/medie})
 			else:
 				print("Dist to small")
 		except Exception:
 			#the first point should be add manualy
 			print("Exception")
-			arrayDictLatLon.append({'lat':latAvg/10.0, 'lon':lonAvg/10.0})
+			arrayDictLatLon.append({'lat':latAvg/medie, 'lon':lonAvg/medie})
 		index, latAvg, lonAvg= 0, 0, 0
 	else:
 		latAvg+= elem[1]
