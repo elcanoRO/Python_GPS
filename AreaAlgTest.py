@@ -55,12 +55,15 @@ for elem in terenZgomot:
 		try:
 			dist= Geodesic.WGS84.Inverse(arrayDictLatLon[-1]['lat'], arrayDictLatLon[-1]['lon'], latAvg/10.0, latAvg/10.0)['s12']
 			#distance between last point and the point to be add is greater then 5 m.
-			print(dist)
+			print(Geodesic.WGS84.Inverse(arrayDictLatLon[-1]['lat'], arrayDictLatLon[-1]['lon'], latAvg/10.0, latAvg/10.0))
 			if(dist>= 5.0):
-				arrayDictLatLon.append({'lat':latAvg/10.0, 'lon':latAvg/10.0})
+				arrayDictLatLon.append({'lat':latAvg/10.0, 'lon':lonAvg/10.0})
+			else:
+				print("Dist to small")
 		except Exception:
 			#the first point should be add manualy
-			arrayDictLatLon.append({'lat':latAvg/10.0, 'lon':latAvg/10.0})
+			print("Exception")
+			arrayDictLatLon.append({'lat':latAvg/10.0, 'lon':lonAvg/10.0})
 		index, latAvg, lonAvg= 0, 0, 0
 	else:
 		latAvg+= elem[1]
