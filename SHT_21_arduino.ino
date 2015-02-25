@@ -1,5 +1,6 @@
 /****************************************************************
  * ReadSHT2x
+ *  https://github.com/misenso/SHT2x-Arduino-Library
  *  An example sketch that reads the sensor and prints the
  *  relative humidity to the PC's serial port
  *
